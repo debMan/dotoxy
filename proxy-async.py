@@ -2,7 +2,6 @@
 
 import asyncio, socket, ssl
 
-
 BIND_ADDRESS = ""
 BIND_PORT = 12345  # Port to listen on (non-privileged ports are > 1023)
 UPSTREAM_HOST='1.1.1.1'
@@ -15,7 +14,7 @@ async def upstream(query, host, port, cn, cafile=None):
     purpose = ssl.Purpose.SERVER_AUTH
     context = ssl.create_default_context(purpose, cafile=cafile)
     raw_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #raw_sock.setblocking(False)
+    # raw_sock.setblocking(False)
     raw_sock.connect((host, port))
     ssl_sock = context.wrap_socket(raw_sock, server_hostname=cn)
     ssl_sock.sendall(query)
@@ -27,6 +26,10 @@ async def handle_client(reader, writer):
         query = await reader.read(1024)
         if not query:
             break
+        # response = await asyncio.gather(
+        #     asyncio.to_thread(
+        #         upstream, query, UPSTREAM_HOST, UPSTREAM_PORT,  UPSTREAM_CN
+        #     ))
         response = await upstream(
             query, 
             UPSTREAM_HOST, 
