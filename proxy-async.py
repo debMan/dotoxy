@@ -15,9 +15,8 @@ async def upstream(query, host, port, cn, cafile=None):
     purpose = ssl.Purpose.SERVER_AUTH
     context = ssl.create_default_context(purpose, cafile=cafile)
     raw_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    raw_sock.setblocking(False)
+    #raw_sock.setblocking(False)
     raw_sock.connect((host, port))
-    # print('Connected to host {} and port {} to query DNS'.format(host, port))
     ssl_sock = context.wrap_socket(raw_sock, server_hostname=cn)
     ssl_sock.sendall(query)
     response = ssl_sock.recv(1024)
@@ -43,5 +42,4 @@ async def run_server():
     async with server:
         await server.serve_forever()
 
-if __name__ == "__main__":
-    asyncio.run(run_server())
+asyncio.run(run_server())
