@@ -35,10 +35,11 @@ class Config:
         with open(self.config_file, "r") as ymlfile:
             config = yaml.safe_load(ymlfile)
         upstream_configfile = config.get("upstream", {})
-        if upstream_configfile is None: upstream_configfile = {}
+        if upstream_configfile is None:
+            upstream_configfile = {}
         server_configfile = config.get("server", {})
-        if server_configfile is None: server_configfile = {}
-
+        if server_configfile is None:
+            server_configfile = {}
 
         # Merge config file and default configs
         upstream.update(upstream_configfile)
@@ -65,5 +66,3 @@ class Config:
 
         self.upstream = upstream
         self.server = server
-
-x = Config()
