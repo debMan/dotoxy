@@ -1,6 +1,6 @@
 # *dotoxy*: A simple DoT proxy
 
-The very simple DoT proxy. which proxies plain DNS queries to an upstream DoT
+The very simple DoT proxy, which proxies plain DNS queries to an upstream DoT
 provider.
 
 ## Introduction
