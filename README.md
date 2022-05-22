@@ -18,7 +18,7 @@ write stream and the local's write stream to the provider's read stream.
 git clone https://github.com/debMan/dotoxy.git
 cd dotoxy
 cp config.example.yml config.yml
-./dotoxy
+./dotoxy.py
 ```
 
 ### Docker
