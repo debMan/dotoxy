@@ -1,0 +1,11 @@
+## Optional configs and the default values ##
+upstream:
+  host: 1.1.1.1
+  port: 853
+  cn: cloudflare-dns.com
+  # CA file: default: None
+  #ca-file: "/pat/to/ca/file"
+
+server:
+  bind-address: 0.0.0.0
+  bind-port: 53

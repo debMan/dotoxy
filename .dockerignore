@@ -1,0 +1,6 @@
+.git
+*.pdf
+.gitignore
+Dockerfile
+config.yml
+config.yaml
