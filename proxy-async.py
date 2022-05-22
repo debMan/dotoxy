@@ -22,22 +22,24 @@ async def upstream(query, host, port, cn, cafile=None):
     return response
 
 async def handle_client(reader, writer):
-    while True:
-        query = await reader.read(1024)
-        if not query:
-            break
-        # response = await asyncio.gather(
-        #     asyncio.to_thread(
-        #         upstream, query, UPSTREAM_HOST, UPSTREAM_PORT,  UPSTREAM_CN
-        #     ))
-        response = await upstream(
-            query, 
-            UPSTREAM_HOST, 
-            UPSTREAM_PORT, 
-            UPSTREAM_CN
-        )
-        writer.write(response)
-        await writer.drain()
+    query = await reader.read(1024)
+    addr = writer.get_extra_info('peername')
+    print(f"Received message from {addr!r}")
+    if not query:
+        return
+    # response = await asyncio.gather(
+    #     asyncio.to_thread(
+    #         upstream, query, UPSTREAM_HOST, UPSTREAM_PORT,  UPSTREAM_CN
+    #     ))
+    response = await upstream(
+        query,
+        UPSTREAM_HOST,
+        UPSTREAM_PORT,
+        UPSTREAM_CN
+    )
+    writer.write(response)
+    await writer.drain()
+    print("Close the connection")
     writer.close()
 
 async def run_server():
