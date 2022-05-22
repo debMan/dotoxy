@@ -23,22 +23,23 @@ def upstream(query, host, port, cn, cafile=None):
     response = ssl_sock.recv(1024)
     return response
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    # s.bind((HOST, PORT))
-    s.bind((BIND_ADDRESS, BIND_PORT))
-    s.listen()
-    conn, addr = s.accept()
-    host, port = addr
-    with conn:
-        print('Incomming connection from {} and port {}'.format(host, port))
-        while True:
-            query = conn.recv(1024)
-            if not query:
-                break
-            response = upstream(
-                query, 
-                UPSTREAM_HOST, 
-                UPSTREAM_PORT, 
-                UPSTREAM_CN
-            )
-            conn.sendall(response)
+while True:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        # s.bind((HOST, PORT))
+        s.bind((BIND_ADDRESS, BIND_PORT))
+        s.listen(2)
+        conn, addr = s.accept()
+        host, port = addr
+        with conn:
+            print('Incomming connection from {} and port {}'.format(host, port))
+            while True:
+                query = conn.recv(1024)
+                if not query:
+                    break
+                response = upstream(
+                    query, 
+                    UPSTREAM_HOST, 
+                    UPSTREAM_PORT, 
+                    UPSTREAM_CN
+                )
+                conn.sendall(response)
