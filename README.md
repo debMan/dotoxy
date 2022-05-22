@@ -17,6 +17,7 @@ write stream and the local's write stream to the provider's read stream.
 ``` bash
 git clone https://github.com/debMan/dotoxy.git
 cd dotoxy
+pip install -r requirements.txt
 cp config.example.yml config.yml
 ./dotoxy.py
 ```
