@@ -1,9 +1,10 @@
+config.yml
+config.yaml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-config.yml
-config.yaml
 
 # C extensions
 *.so

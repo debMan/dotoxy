@@ -17,7 +17,8 @@ write stream and the local's write stream to the provider's read stream.
 ``` bash
 git clone https://github.com/debMan/dotoxy.git
 cd dotoxy
-dotoxy --help
+cp config.example.yml config.yml
+./dotoxy
 ```
 
 ### Docker
@@ -57,6 +58,7 @@ The service is ready for deployments on container orchestrator platforms like
 - [ ] Add UDP support
 - [x] Make the proxy configurable (upstream, bind address, port, TLS versions,
   etc) with environment variables and config file
+- [ ] Add tests and CI/CD
 - [ ] Check packet length with the prefixed two-byte field which gives the
   message length
 - [ ] Add IPv6 support
